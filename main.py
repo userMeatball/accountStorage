@@ -71,7 +71,6 @@ def search():
             print("Invalid input...")
 
 def edit():
-    read()
     test = True
     while test == True:
         row = input("Enter the row number: ")
@@ -100,21 +99,42 @@ def edit():
         else:
             print("Invalid input...")
 
-    print("Row: ", str(row), " changed to:", str(newValue))
-    commit = input("Are you sure you want to save? (y)es / (n)o : ")
-    if commit == "y" or commit == "Y":
-        print("Saved!")
-        conn.commit()
-    elif commit == "n" or commit == "N":
-        print("No changes were made!")
-        conn.rollback()
-    else:
-        print("Invalid input...")
+    testy = True
+    while testy == True:
+        print("Row: ", str(row), " changed to:", str(newValue))
+        commit = input("Are you sure you want to save? (y)es / (n)o : ")
+        if commit == "y" or commit == "Y":
+            print("Saved!")
+            conn.commit()
+            testy = False
+        elif commit == "n" or commit == "N":
+            print("No changes were made!")
+            conn.rollback()
+            testy = False
+        else:
+            print("Invalid input...")
+
+def delete():
+    row = input("Enter the row number you would like to delete: ")
+    c.execute('DELETE FROM accounts WHERE id=?', (row))
+    testy = True
+    while testy == True:
+        choice = input("Row: " + str(row) + " will be deleted, are you sure? (y)es / (n)o : ")
+        if choice == "y" or choice == "Y":
+            print("Deleted!")
+            conn.commit()
+            testy = False
+        elif choice == "n" or choice == "N":
+            print("No changes were made!")
+            conn.rollback()
+            testy = False
+        else:
+            print("Invalid input...")
 
 
 testX = True
 while testX == True:
-    option = input("(a)dd / (v)iew / (s)earch / (e)dit / (q)uit : ")
+    option = input("(a)dd / (v)iew / (s)earch / (e)dit / (d)elete / (q)uit : ")
     if option == "a" or option == "A":
         entry()
         print("Successfully added")
@@ -124,6 +144,8 @@ while testX == True:
         search()
     elif option == "e" or option == "E":
         edit()
+    elif option == "d" or option == "D":
+        delete()
     elif option == "q" or option == "Q":
         testX = False
     else:
