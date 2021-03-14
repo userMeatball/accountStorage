@@ -38,32 +38,32 @@ def search():
         elif userSearch == "2":
             search = input("Enter query: ")
             c.execute('SELECT * FROM accounts WHERE username=?', (search,))
-            for row in c.fetchone():
+            for row in c():
                 print(row)
             test = False
         elif userSearch == "3":
             search = input("Enter query: ")
             c.execute('SELECT * FROM accounts WHERE email=?', (search,))
-            for row in c.fetchone():
+            for row in c:
                 print(row)   
             test = False
         elif userSearch == "4":
             search = input("Enter query: ")
             c.execute('SELECT * FROM accounts WHERE password=?', (search,))
-            for row in c.fetchone():
+            for row in c:
                 print(row)         
             test = False
         elif userSearch == "5":
             search = input("Enter query: ")
             c.execute('SELECT * FROM accounts WHERE backup_email=?', (search,))
-            for row in c.fetchone():
+            for row in c:
                 print(row)      
             test = False
         elif userSearch == "6":
             search = input("Enter query: ")
             c.execute('SELECT * FROM accounts WHERE two_factor_auth=?', (search,))
-            for row in c.fetchone():
-                print(row)       
+            for row in c:
+                print(row)      
             test = False
         elif userSearch == "q" or userSearch == "Q":
             break
