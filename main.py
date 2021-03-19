@@ -1,4 +1,5 @@
 import sqlite3
+import random, string
 
 conn = sqlite3.connect('data.db')
 
@@ -11,7 +12,12 @@ def entry():
     platform = input("platform: ")
     username = input("username: ")
     email = input("email address: ")
-    password = input("password: ")
+    password = input("password (type 'g' to generate one): ")
+    if password == "g" or password == "G":
+        password = ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits + string.punctuation) for c in range(20))
+        for ch in password:
+            if ch == " ":
+                ch.replace('')
     backup_email = input("backup email address: ")
     two_factor_auth = input("two factor auth: ")
 
