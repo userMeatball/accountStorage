@@ -122,7 +122,7 @@ def edit():
 
 def delete():
     row = input("Enter the row number you would like to delete: ")
-    c.execute('DELETE FROM accounts WHERE id=?', (row))
+    c.execute('DELETE FROM accounts WHERE id=?', (row,))
     testy = True
     while testy == True:
         choice = input("Row: " + str(row) + " will be deleted, are you sure? (y)es / (n)o : ")
@@ -155,7 +155,7 @@ while testX == True:
     elif option == "q" or option == "Q":
         testX = False
     else:
-        input("Invalid input...")
+        print("Invalid input...")
 
 c.close()  
 conn.close()
